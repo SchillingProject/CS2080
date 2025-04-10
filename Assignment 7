@@ -1,0 +1,16 @@
+#Copyright (c) Mackenzie Parker 04/07/2025
+# Dockerfile code
+FROM ubuntu
+RUN apt-get update
+RUN apt install vim -y
+RUN apt install nginx -y
+COPY app.sh /bin
+RUN chmod +x /bin/app.sh
+CMD ["/bin/app.sh"]
+
+# app.sh code
+#!/bin/bash
+service nginx start
+sed -i "s/Welcome to nginx/Welcome to Mackenzies page/" /var/www/html/*.html
+sed -i "s/nginx/nginx (pronounced as EngineX)/g" /var/www/html/*.html
+service nginx restart 
